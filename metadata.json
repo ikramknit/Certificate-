@@ -1,0 +1,5 @@
+{
+  "name": "Certificate Generator",
+  "description": "A web application that allows users to fill in their details into a form and generate a professional-looking membership certificate based on a provided template. The certificate is displayed in real-time as the user types.",
+  "requestFramePermissions": []
+}
