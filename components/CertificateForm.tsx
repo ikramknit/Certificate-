@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { CertificateData } from '../types';
 
@@ -6,9 +5,10 @@ interface CertificateFormProps {
   data: CertificateData;
   onInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void;
   onPhotoChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onSubmit: () => void;
 }
 
-const CertificateForm: React.FC<CertificateFormProps> = ({ data, onInputChange, onPhotoChange }) => {
+const CertificateForm: React.FC<CertificateFormProps> = ({ data, onInputChange, onPhotoChange, onSubmit }) => {
   const renderInput = (name: keyof CertificateData, label: string, type: string = 'text') => (
     <div>
       <label htmlFor={name} className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
@@ -24,7 +24,7 @@ const CertificateForm: React.FC<CertificateFormProps> = ({ data, onInputChange, 
   );
 
   return (
-    <form className="space-y-4">
+    <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); onSubmit(); }}>
       <h2 className="text-2xl font-semibold text-gray-900 border-b pb-2">Enter Your Details</h2>
       {renderInput('registrationNo', 'Registration No.')}
       {renderInput('name', 'Name of Candidate')}
@@ -78,6 +78,12 @@ const CertificateForm: React.FC<CertificateFormProps> = ({ data, onInputChange, 
           className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
         />
       </div>
+       <button
+        type="submit"
+        className="w-full bg-indigo-600 text-white font-bold py-3 px-4 rounded-lg shadow-md hover:bg-indigo-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 mt-4"
+      >
+        Generate Certificate
+      </button>
     </form>
   );
 };

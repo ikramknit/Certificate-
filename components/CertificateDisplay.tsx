@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { CertificateData } from '../types';
 import { MedalIcon } from './icons/MedalIcon';
@@ -7,16 +6,16 @@ interface CertificateDisplayProps {
   data: CertificateData;
 }
 
-const CertificateDisplay: React.FC<CertificateDisplayProps> = ({ data }) => {
-  const renderDetailRow = (label: string, value: string) => (
-    <div className="grid grid-cols-3 gap-2 items-start text-sm font-semibold">
-      <span className="col-span-1 text-gray-800">{label}</span>
-      <span className="col-span-2 text-gray-600 whitespace-pre-wrap">: {value}</span>
-    </div>
-  );
+const renderDetailRow = (label: string, value: string) => (
+  <div className="grid grid-cols-3 gap-2 items-start text-sm font-semibold">
+    <span className="col-span-1 text-gray-800">{label}</span>
+    <span className="col-span-2 text-gray-600 whitespace-pre-wrap">: {value}</span>
+  </div>
+);
 
+const CertificateDisplay = React.forwardRef<HTMLDivElement, CertificateDisplayProps>(({ data }, ref) => {
   return (
-    <div className="bg-white shadow-2xl rounded-lg aspect-[1/1.414] w-full p-4 relative overflow-hidden bg-gradient-to-br from-[#fffdf5] to-[#f9f3e5]">
+    <div ref={ref} className="bg-white shadow-2xl rounded-lg aspect-[1/1.414] w-full p-4 relative overflow-hidden bg-gradient-to-br from-[#fffdf5] to-[#f9f3e5]">
       {/* Watermark */}
       <div className="absolute inset-0 z-0 grid grid-cols-3 gap-16 text-[#f2eee3] font-devanagari text-2xl font-bold opacity-80 select-none overflow-hidden">
         {[...Array(24)].map((_, i) => (
@@ -82,6 +81,7 @@ const CertificateDisplay: React.FC<CertificateDisplayProps> = ({ data }) => {
                     <img
                       src={data.photoUrl}
                       alt="Candidate"
+                      crossOrigin="anonymous"
                       className="w-28 h-36 object-cover border-4 border-gray-300 shadow-md rounded-md"
                     />
                   )}
@@ -114,6 +114,6 @@ const CertificateDisplay: React.FC<CertificateDisplayProps> = ({ data }) => {
       </div>
     </div>
   );
-};
+});
 
 export default CertificateDisplay;
